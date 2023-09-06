@@ -662,7 +662,7 @@ def wallet_balance(message: Message):
              bot.send_message(message.chat.id, MESSAGES['ALREADY_RECEIVED_FREE'], reply_markup=main_menu_keyboard_markup())
         else:
             bot.send_message(message.chat.id, MESSAGES['REQUEST_SEND_NAME'], reply_markup=cancel_markup())
-        bot.register_next_step_handler(message, next_step_send_name_for_get_free_test)
+            bot.register_next_step_handler(message, next_step_send_name_for_get_free_test)
 
 
 # Start

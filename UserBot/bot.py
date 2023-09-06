@@ -265,28 +265,33 @@ def next_step_send_name_for_get_free_test(message: Message):
                                                   int(PANEL_ADMIN_ID))
     if not value:
         bot.send_message(message.chat.id,
-                                     f"{MESSAGES['ERROR_UNKNOWN']}\n{MESSAGES['ORDER_ID']} {order_id}")
+                                     f"{MESSAGES['ERROR_UNKNOWN']}\n{MESSAGES['ORDER_ID']} {order_id}",
+                                     reply_markup=main_menu_keyboard_markup())
         return
     sub_id = random.randint(1000000, 9999999)
     add_sub_status = USERS_DB.add_order_subscription(sub_id, order_id, value)
     if not add_sub_status:
         bot.send_message(message.chat.id,
-                                     f"{MESSAGES['ERROR_UNKNOWN']}\n{MESSAGES['ORDER_ID']} {order_id}")
+                                     f"{MESSAGES['ERROR_UNKNOWN']}\n{MESSAGES['ORDER_ID']} {order_id}",
+                                     reply_markup=main_menu_keyboard_markup())
         return
     status = USERS_DB.add_order(order_id, message.chat.id, name, plan_id, paid_amount, payment_method, path,
                                 created_at,True)
     if not status:
         bot.send_message(message.chat.id,
-                                     f"{MESSAGES['ERROR_UNKNOWN']}\n{MESSAGES['ORDER_ID']} {order_id}")
+                                     f"{MESSAGES['ERROR_UNKNOWN']}\n{MESSAGES['ORDER_ID']} {order_id}",
+                                     reply_markup=main_menu_keyboard_markup())
         return
     
     user_info = USERS_DB.edit_user(message.chat.id,get_free=True)
     if not user_info:
         bot.send_message(message.chat.id,
-                                     f"{MESSAGES['ERROR_UNKNOWN']}\n{MESSAGES['ORDER_ID']} {order_id}")
+                                     f"{MESSAGES['ERROR_UNKNOWN']}\n{MESSAGES['ORDER_ID']} {order_id}",
+                                     reply_markup=main_menu_keyboard_markup())
         return
     bot.send_message(message.chat.id,
-                                      f"{MESSAGES['GET_FREE_CONFIRMED']}\n{MESSAGES['ORDER_ID']} {order_id}")
+                                      f"{MESSAGES['GET_FREE_CONFIRMED']}\n{MESSAGES['ORDER_ID']} {order_id}",
+                                      reply_markup=main_menu_keyboard_markup())
 # ----------------------------------- To QR Area -----------------------------------
 # Next Step QR - QR Code
 def next_step_to_qr(message: Message):
